@@ -12,5 +12,10 @@
 */
 
 Route::get('/','ProductController@getIndex');
+Route::group(['prefix'=>'user'],function (){
+    Route::get('signup','UserController@getSignup');
+    Route::post('signup','UserController@postSignup');
 
+    Route::get('profile','UserController@getProfile');
+});
 
