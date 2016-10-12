@@ -14,12 +14,15 @@
 Route::get('/','ProductController@getIndex');
 
 Route::group(['prefix'=>'user'],function (){
-    Route::get('signup','UserController@getSignup');
-    Route::post('signup','UserController@postSignup');
-
-    Route::get('login','UserController@getLogin');
-    Route::post('login','UserController@postLogin');
-
-    Route::get('profile','UserController@getProfile');
+    Route::group(['middleware'=>'guest'],function (){
+        Route::get('signup','UserController@getSignup');
+        Route::post('signup','UserController@postSignup');
+        Route::get('login','UserController@getLogin');
+        Route::post('login','UserController@postLogin');
+    });
+    Route::group(['middleware'=>'auth'],function (){
+        Route::get('profile','UserController@getProfile');
+        Route::get('logout','UserController@getLogout');
+    });
 });
 

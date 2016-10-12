@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function getSignup(){
@@ -20,10 +20,13 @@ class UserController extends Controller
         ]);
         $user = new User([
             'email'=> $request->input('email'),
-            'password'=>bcrypt($request->input('password'))
+            'password'=>bcrypt($request->input('password')),
         ]);
+        //Auth::login($user);
         $user->save();
-        return redirect('user/profile');
+        if(Auth::attempt(['email'=>$request->input('email'),'password'=>$request->input('password')])){
+            return redirect('user/profile');
+        }
     }
 
     public function getLogin(){
@@ -43,5 +46,10 @@ class UserController extends Controller
 
     public function getProfile(){
         return view ('user.profile');
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect('/');
     }
 }

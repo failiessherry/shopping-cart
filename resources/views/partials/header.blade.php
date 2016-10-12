@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="{{url('/')}}">Brand</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -18,10 +18,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x" aria-hidden="true"></i> UserAccount<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{url('user/signup')}}">SignUp</a></li>
-                        <li><a href="{{url('user/login')}}">LogIn</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">LogOut</a></li>
+                        @if(Auth::check())
+                            <li><a href="{{url('user/profile')}}">User Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{url('user/logout')}}">LogOut</a></li>
+                        @else
+                            <li><a href="{{url('user/signup')}}">SignUp</a></li>
+                            <li><a href="{{url('user/login')}}">LogIn</a></li>
+                        @endif
                     </ul>
                 </li>
             </ul>
