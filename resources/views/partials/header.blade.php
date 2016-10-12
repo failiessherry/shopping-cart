@@ -19,7 +19,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x" aria-hidden="true"></i> UserAccount<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('user/signup')}}">SignUp</a></li>
-                        <li><a href="#">LogIn</a></li>
+                        <li><a href="{{url('user/login')}}">LogIn</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">LogOut</a></li>
                     </ul>
