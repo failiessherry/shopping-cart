@@ -32,7 +32,7 @@
         <hr>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <button type="tutton" class="btn btn-success">CheckOut</button>
+                <a href="{{url('checkout')}}" type="tutton" class="btn btn-success">CheckOut</a>
             </div>
         </div>
     @else

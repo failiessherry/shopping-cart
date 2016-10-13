@@ -14,6 +14,7 @@ class ProductController extends Controller
         $Products = Product::all();
         return view('shop.index',['Products'=>$Products]);
     }
+
     public function getAddToCart(Request $request,$id){
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart'):null;
@@ -23,6 +24,7 @@ class ProductController extends Controller
         $request->session()->put('cart',$cart);
         return redirect('/');
     }
+
     public function getCart(){
         if(!Session::has('cart')){
             return view('shop.shoppingcart');
@@ -31,4 +33,15 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
         return view('shop.shoppingcart',['products'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
     }
+
+    public function getCheckOut(){
+        if(!Session::has('cart')){
+            return view('shop.shoppingcart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        return view('shop.checkout',['total'=>$total]);
+    }
+
 }
