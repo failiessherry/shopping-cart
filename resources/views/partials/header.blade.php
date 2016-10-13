@@ -14,7 +14,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> ShoppingCart</a></li>
+                <li>
+                    <a href="{{url('shoppingcart')}}">
+                        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> ShoppingCart
+                        <span class="badge">{{Session::has('cart')?Session::get('cart')->totalQty:''}}</span>
+                    </a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x" aria-hidden="true"></i> UserAccount<span class="caret"></span></a>
                     <ul class="dropdown-menu">

@@ -7,8 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Session;
-
+use Session;
 class ProductController extends Controller
 {
     public function getIndex(){
@@ -23,5 +22,13 @@ class ProductController extends Controller
 
         $request->session()->put('cart',$cart);
         return redirect('/');
+    }
+    public function getCart(){
+        if(!Session::has('cart')){
+            return view('shop.shoppingcart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shoppingcart',['products'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
     }
 }
