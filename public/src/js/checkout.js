@@ -18,11 +18,11 @@ $form.submit(function(event){
 function stripeResponseHandler(status,response) {
     if(response.error){
         $('#charage-error').removeClass('hidden');
-        $('#charage-error').test(response.error.message);
+        $('#charage-error').text(response.error.message);
         $form.find('button').prop('disabled',false);
     }else{
         var token = response.id;
-        $form.append($('<input type="hidden" name="stripeToken">').val(token));
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
         // Submit the form:
         $form.get(0).submit();
     }
