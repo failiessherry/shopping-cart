@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 class UserController extends Controller
 {
     public function getSignup(){
@@ -25,6 +27,11 @@ class UserController extends Controller
         //Auth::login($user);
         $user->save();
         if(Auth::attempt(['email'=>$request->input('email'),'password'=>$request->input('password')])){
+            if(Session::has('oldUrl')){
+                $oldUrl = Session::get('oldUrl');
+                Session::forget('oldUrl');
+                return redirect()->to($oldUrl);
+            }
             return redirect('user/profile');
         }
     }
@@ -39,6 +46,11 @@ class UserController extends Controller
             'password' =>'required|min:4'
         ]);
         if(Auth::attempt(['email'=>$request->input('email'),'password'=>$request->input('password')])){
+            if(Session::has('oldUrl')){
+                $oldUrl = Session::get('oldUrl');
+                Session::forget('oldUrl');
+                return redirect()->to($oldUrl);
+            }
             return redirect('user/profile');
         }
         return redirect()->back();

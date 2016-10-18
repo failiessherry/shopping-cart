@@ -14,8 +14,10 @@
 Route::get('/','ProductController@getIndex');
 Route::get('add-to-cart/{id}','ProductController@getAddToCart');
 Route::get('shoppingcart','ProductController@getCart');
-Route::get('checkout','ProductController@getCheckOut');
-Route::post('checkout','ProductController@postCheckOut');
+Route::group(['middleware' =>'auth'],function (){
+    Route::get('checkout','ProductController@getCheckOut');
+    Route::post('checkout','ProductController@postCheckOut');
+});
 Route::group(['prefix'=>'user'],function (){
     Route::group(['middleware'=>'guest'],function (){
         Route::get('signup','UserController@getSignup');
